@@ -1,12 +1,21 @@
-{
-  "extends": ["react-app", "plugin:react/recommended"],
-  "plugins": ["import", "simple-import-sort", "react", "react-hooks"],
-  "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+module.exports = {
+  extends: ["airbnb", "airbnb/hooks"],
+  plugins: ["import", "simple-import-sort", "react", "react-hooks"],
+  env: {
+    browser: true,
+    node: true,
+    es2021: true,
+  },
+  rules: {
+    quotes: "off",
+    "react/prop-types": 0,
+    "import/prefer-default-export": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "simple-import-sort/imports": [
       2,
       {
-        "groups": [
+        groups: [
           // Side effect imports.
           ["^\\u0000"],
           // React, Redux imports
@@ -21,16 +30,17 @@
           // Anything that does not start with a dot.
           // Relative imports.
           // Anything that starts with a dot.
-          ["^[^.]", "^\\."]
-        ]
-      }
-    ]
+          ["^[^.]", "^\\."],
+        ],
+      },
+    ],
   },
-  "settings": {
+  settings: {
     "import/resolver": {
-      "alias": {
-        "map": [["@", "./"]]
-      }
-    }
-  }
-}
+      webpack,
+      alias: {
+        map: [["@", "./"]],
+      },
+    },
+  },
+};

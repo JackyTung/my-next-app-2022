@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { StyledContainer } from "./styles";
 
-const Layout = ({ title = "Next Demo APP", children }) => {
+function Layout({ title = "Next Demo APP", children }) {
   return (
     <>
       <Head>
@@ -18,6 +18,6 @@ const Layout = ({ title = "Next Demo APP", children }) => {
       <StyledContainer>{children}</StyledContainer>
     </>
   );
-};
+}
 
 export default Layout;
