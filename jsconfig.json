@@ -4,7 +4,11 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/containers/*": ["containers/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/redux/*": ["redux/*"],
+      "@/apis/*": ["apis/*"],
+      "@/utils/*": ["utils/*"],
+      "@/hooks/*": ["hooks/*"],
     }
   }
 }
