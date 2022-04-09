@@ -11,20 +11,23 @@ import {
   fetchProfileSuccess,
 } from "./slice";
 
-const fetchAnchorTagEpic = (action$) =>
+const fetchProfileEpic = (action$) =>
   action$.pipe(
     ofType(fetchProfile.type),
     mergeMap((action) =>
       backend.getProfile({ userName: action?.payload?.userName }).pipe(
-        map((response) =>
-          fetchProfileSuccess({ name: response?.name, email: response?.email })
-        ),
+        map((response) => {
+          return fetchProfileSuccess({
+            name: response?.name,
+            email: response?.email,
+          });
+        }),
         takeUntil(action$.pipe(ofType(fetchProfileCancelled.type))),
         catchError((error) => of(fetchProfileRejected(error)))
       )
     )
   );
 
-const epics = combineEpics(fetchAnchorTagEpic);
+const epics = combineEpics(fetchProfileEpic);
 
 export default epics;
