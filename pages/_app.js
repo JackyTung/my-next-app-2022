@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-
+import { wrapper } from "@/redux/rootStore";
 import { useEffect } from "react";
 
 import { useRouter } from "next/router";
@@ -29,4 +29,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
