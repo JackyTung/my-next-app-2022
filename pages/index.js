@@ -6,6 +6,7 @@ import { fetchProfile } from "@/redux/profile/slice";
 import useIsMounted from "@/hooks/useIsMounted";
 import { wrapper } from "@/redux/rootStore";
 import rootEpic from "@/redux/rootEpic";
+import { of } from "rxjs";
 
 const HomePage = () => {
   const dispatch = useDispatch();
