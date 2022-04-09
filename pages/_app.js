@@ -29,4 +29,19 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  // 1. Wait for all page actions to dispatch
+  const pageProps = {
+    ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+  };
+
+  // 3. Return props
+  return {
+    pageProps: {
+      // Call page-level getInitialProps
+      pageProps,
+    },
+  };
+};
+
 export default wrapper.withRedux(MyApp);
