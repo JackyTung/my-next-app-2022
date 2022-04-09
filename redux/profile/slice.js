@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAction } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
+
+const hydrate = createAction(HYDRATE);
 
 const initialState = { name: "", email: "" };
 
@@ -16,6 +19,12 @@ const slice = createSlice({
       return state;
     },
     fetchProfileCancelled: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(hydrate, (state, action) => ({
+      ...state,
+      ...action.payload.profile,
+    }));
   },
 });
 
