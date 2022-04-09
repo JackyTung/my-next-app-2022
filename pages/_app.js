@@ -1,10 +1,11 @@
 import "../styles/globals.css";
-import { ThemeProvider } from "styled-components";
+
 import { useEffect } from "react";
+
 import { useRouter } from "next/router";
+import { ThemeProvider } from "styled-components";
 
 import Reset from "@/styles/reset";
-
 import themes from "@/styles/themes";
 
 function MyApp({ Component, pageProps }) {

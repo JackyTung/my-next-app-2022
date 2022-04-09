@@ -6,3 +6,5 @@ export const StyledContainer = styled.div`
   ${layout}
   ${space}
 `;
+
+export default {};
