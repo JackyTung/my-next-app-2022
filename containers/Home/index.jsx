@@ -1,5 +1,11 @@
+import { StyledContainer } from "./styles.js";
+
 const Home = () => {
-  return <div>This is home page</div>;
+  return (
+    <StyledContainer>
+      <h1>This is home page</h1>
+    </StyledContainer>
+  );
 };
 
 export default Home;
