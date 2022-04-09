@@ -1,26 +1,27 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { createEpicMiddleware } from "redux-observable";
 import { createWrapper } from "next-redux-wrapper";
+import { applyMiddleware, compose, createStore } from "redux";
+import { createEpicMiddleware } from "redux-observable";
 
-import rootEpic from "@/redux/rootEpic";
-import rootReducer from "@/redux/rootReducer";
+import rootEpic from "./rootEpic";
+import rootReducer from "./rootReducer";
 
-const configureStore = () => {
+const isServer = typeof window !== "object";
+const isProduction = process.env.NODE_ENV === "production";
+
+const makeStore = () => {
   const epicMiddleware = createEpicMiddleware();
-  const store = createStore(
-    rootReducer,
-    composeWithDevTools({ trace: true })(applyMiddleware(epicMiddleware))
-  );
+  const reduxMiddleware = applyMiddleware(epicMiddleware);
 
+  const composeEnhancers =
+    !isProduction && !isServer && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+          // Specify extension's options like name, actionsBlacklist, actionsCreators, serialize...
+        })
+      : compose;
+
+  const Store = createStore(rootReducer, composeEnhancers(reduxMiddleware));
   epicMiddleware.run(rootEpic);
-
-  return store;
+  return Store;
 };
 
-// https://github.com/kirill-konshin/next-redux-wrapper/issues/276#issuecomment-891342315
-export const wrapper = createWrapper(configureStore, {
-  debug: false,
-  serializeState: (state) => JSON.stringify(state),
-  deserializeState: (state) => JSON.parse(state),
-});
+export const wrapper = createWrapper(makeStore, { debug: false });

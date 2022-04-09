@@ -8,6 +8,7 @@
       "@/redux/*": ["redux/*"],
       "@/apis/*": ["apis/*"],
       "@/utils/*": ["utils/*"],
+      "@/hooks/*": ["hooks/*"],
     }
   }
 }
